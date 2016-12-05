@@ -64,7 +64,7 @@ class CoAP(object):
         if self.multicast:  # pragma: no cover
 
             # Create a socket
-            self._socket = socket.socket(addrinfo[1], socket.SOCK_DGRAM)
+            self._socket = socket.socket(addrinfo[0], socket.SOCK_DGRAM)
 
             # Allow multiple copies of this program on one machine
             # (not strictly needed)
@@ -73,7 +73,7 @@ class CoAP(object):
             # Bind it to the port
             self._socket.bind(('', self.server_address[1]))
 
-            group_bin = socket.inet_pton(addrinfo[1], addrinfo[4][0])
+            group_bin = socket.inet_pton(addrinfo[0], addrinfo[4][0])
             # Join group
             if addrinfo[0] == socket.AF_INET: # IPv4
                 mreq = group_bin + struct.pack('=I', socket.INADDR_ANY)
